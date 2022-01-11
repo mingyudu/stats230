@@ -1,0 +1,33 @@
+---
+title: "matrices multiplication benchmarking"
+author: "Mingyu Du"
+output: html_document
+---
+
+URL of my github repo: https://github.com/mingyudu/stats230
+
+```{r warning=FALSE,message=FALSE}
+devtools::load_all("./package/")
+library(bench)
+```
+
+I create 2 square matrices $A$, $B$ with dimension of $n \times n$, and a $n$-length vector $x$.
+
+```{r}
+n <- 100
+A <- matrix(runif(n*n), n, n)
+B <- matrix(runif(n*n), n, n)
+x <- matrix(runif(n), n, 1)
+```
+
+I use `bench::mark` function to do the microbenchmarking.
+
+```{r}
+bench::mark(
+  mat_mult(A, B, x, 1),
+  mat_mult(A, B, x, 2)
+)
+```
+
+Based on the experiment result, the second way of multiplication is much faster than the first one and use much less memory allocation.
+
