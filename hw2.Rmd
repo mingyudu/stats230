@@ -1,0 +1,243 @@
+---
+title: "STATS230-Hw2"
+author: "Mingyu Du"
+output: pdf_document
+---
+
+# Problem 1
+
+$$
+\begin{aligned}
+A = LL^T\\
+a_{11}=l_{11}^2=2\\
+a_{12}=l_{11}l_{21}=-2\\
+a_{22}=l_{21}^2+l_{22}^2=5
+\end{aligned}
+$$
+
+We can see that $l_{11}=\sqrt{2}$, $l_{21}=-\sqrt{2}$, and $l_{22}=\sqrt{3}$. Thus,
+
+$$
+L = \left(\begin{array}{cc}
+\sqrt{2} & 0 \\
+-\sqrt{2} & \sqrt{3}
+\end{array}\right)
+$$
+
+# Problem 2
+
+Assume $A$ is a positive definite matrix with band condition in the sense that $a_{ij}=0$ when $|i-j|>d$, and $B$ is its Cholesky decomposition matrix such that $A=BB^T$ and
+
+$$
+B = \left(\begin{array}{cc}
+b_{11} & {0}^T \\
+\bar{b} & B_{22}
+\end{array}\right),
+$$
+
+we can obtain $b_{11}=\sqrt{a_{11}}$ and 
+
+$$
+\bar{b}=b_{11}^{-1}\left(a_{21}, a_{31}, \ldots, a_{d+1,1},0,\ldots,0\right)^T,
+$$
+
+in which $\bar{b}_{i}=0$ when $i>d$. Thus, we have $b_{i1}=0$ when $|i-1|>d$.
+
+Furthermore, $B_{22}$ is the Cholesky decomposition of $A_{22}-\bar{b}\bar{b}^T$.
+
+Denote the first column of $A_{22}$ as $\bar{c}$ and denote the first column of $\bar{b}\bar{b}^T$ as $\bar{d}$.  
+$\bar{c}=\left(a_{22},\ldots,a_{d+2,2},0,\ldots,0\right)^T$, so $\bar{c}_i=0$ when $i>d+1$. And for the matrix $\bar{b}\bar{b}^T$, we can find that $\bar{d}_i=0$ when $i>d$. Denote $B_{22}$ as
+
+$$
+B_{22} = \left(\begin{array}{cc}
+b_{22} & {0}^T \\
+\bar{e} & B_{33}
+\end{array}\right),
+$$
+
+After solving the equations, we get $b_{22}=\sqrt{a_{22}-\frac{a_{21}^2}{a_{11}}}$ and 
+
+$$
+\bar{e}=b_{22}^{-1}\left(\bar{c}_2-\bar{d}_2,\bar{c}_3-\bar{d}_3,\ldots,\bar{c}_{d+1}-\bar{d}_{d+1},0,\ldots,0\right)^T
+$$
+
+in which $\bar{e}_i=0$ when $i>d$. Thus, we get $b_{i2}=0$ when $|i-2|>d$.
+
+We have already made the proof for $j=1,2$. Similarly, this condition also applies for other values of $j$, so $b_{ij}=0$ when $|i-j|>d$.
+
+# Problem 3
+
+$$
+\begin{aligned}
+X^TX&=(QR)^TQR\\
+&=R^TQ^TQR\\
+&=R^TR
+\end{aligned}
+$$
+
+Thus, we get
+
+$$
+\begin{aligned}
+X\left(X^TX\right)^{-1}X^T & = QR\left(R^TR\right)^{-1}R^TQ^T\\
+& = QRR^{-1}\left(R^T\right)^{-1}R^TQ^T\\
+& = QQ^T
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+|det\left(X\right)|&=|det\left(QR\right)|\\
+&=|det\left(Q\right)||det\left(R\right)|\\
+&=|det\left(R\right)|
+\end{aligned}
+$$
+in which $|det\left(Q\right)|=1$ since $Q$ is a matrix with orthonormal columns.
+
+$$
+\begin{aligned}
+det\left(X^TX\right)&=det\left(X^T\right)det\left(X\right)\\
+&=det\left(X\right)det\left(X\right)\\
+&=[det(R)]^2
+\end{aligned}
+$$
+
+# Problem 4
+
+$$
+\begin{aligned}
+AA^T &= \left(\begin{array}{cc}
+\cos (\theta) & \sin (\theta) \\
+\sin (\theta) & -\cos (\theta)
+\end{array}\right)
+\left(\begin{array}{cc}
+\cos (\theta) & \sin (\theta) \\
+\sin (\theta) & -\cos (\theta)
+\end{array}\right)\\
+&=\left(\begin{array}{cc}
+1 & 0\\
+0 & 1
+\end{array}\right)
+\end{aligned}
+$$
+
+Thus, $A$ is orthogonal.
+
+Solving $|det\left(A-\lambda I\right)|=0$, we can get $\lambda_1=1$ and $\lambda_2=-1$.
+
+For $\lambda_1=1$, solving $(A-\lambda_1I)v_1=0$, we can get $v_1=\left(1,\frac{sin\theta}{cos\theta+1}\right)^T$.
+
+For $\lambda_2=-1$, solving $(A-\lambda_2I)v_2=0$, we can get $v_2=\left(1,\frac{sin\theta}{cos\theta-1}\right)^T$.
+
+# Problem 5
+
+Since $Ov=\lambda v$, we have
+
+$$
+\begin{aligned}
+|\lambda|^2v^Tv &= (Ov)^T(Ov)\\
+&=v^TO^TOv\\
+&=v^Tv
+\end{aligned}
+$$
+
+Thus, $\lambda =\pm 1$
+
+# Problem 6
+
+Based on singular value decomposition, $A^{-1}=U\Sigma^{-1} V^T$, where
+
+$$
+\Sigma^{-1}=\left(\begin{array}{llll}
+\frac{1}{\sigma_{1}} & & & \\
+& \frac{1}{\sigma_{2}} & & \\
+& & \ddots & \\
+& & & \frac{1}{\sigma_{m}}
+\end{array}\right)
+$$
+
+Thus,
+
+$$
+\begin{aligned}
+cond_2(A)&=\|A\|_{2}\left\|A^{-1}\right\|_{2}\\
+&=max_i\sigma_i\times max_i(\frac{1}{\sigma_i})\\
+&=\frac{\max_{i} \sigma_{i}}{\min_{i} \sigma_{i}}
+\end{aligned}
+$$
+
+# Problem 7
+
+Simulation from $n$-dimensional multivariate normal distribution via Cholesky decomposition can be summarized as follows:
+
+- Compute the Cholesky decomposition matrix $L$ such that $\Sigma=LL^T$.
+
+- Generate $\bar{z}\sim N_n\left(0,I\right)$.
+
+- Compute $\bar{x}=\bar{\mu}+L\bar{z}$.
+
+I create a function `mvn_chol_sim` for the simulation.
+
+```{r warning=FALSE,message=FALSE}
+devtools::load_all("./package/")
+library(bench)
+```
+
+```{r}
+N <- 100
+n <- 4
+# specify the mean vector and covariance matrix (positive definite)
+mu <- runif(n)
+A <- matrix(runif(n^2)*2-1, ncol = n)
+sigma <- t(A) %*% A
+# simulation
+sim_x <- mvn_chol_sim(N, mu, sigma)
+# validation
+sample_mean <- apply(sim_x, 1, mean)
+sample_cov <- cov(t(sim_x))
+mu
+sample_mean
+sigma
+sample_cov
+```
+
+# Problem 8
+
+```{r}
+data <- read.csv("homework2_regression.csv")
+y <- data[,1]
+x <- data[,-1]
+```
+
+The method to obtain OLS estimates of coefficients using QR decomposition can be summarized as follows:
+
+$$
+\begin{aligned}
+\hat{\beta} &= \left(X^{T} X\right)^{-1} X^{T} y\\
+&= \left(\left(QR\right)^{T} QR\right)^{-1} \left(QR\right)^{T} y\\
+& = \left(R^TQ^TQR\right)^{-1} R^TQ^T y\\
+& = \left(R^TR\right)^{-1} R^TQ^T y\\
+& = R^{-1}Q^Ty
+\end{aligned}
+$$
+
+The method to obtain OLS estimates of coefficients using SVD can be summarized as follows: Assume $X=U\Sigma V^T$, we can get $\hat{\beta}=V\Sigma^{-1}U^Ty$.
+
+I create two functions: `ols_qr` and `ols_svd` for QR decomposition and SVD respectively:
+
+```{r}
+ols_qr(x,y)
+```
+
+```{r}
+ols_svd(x,y)
+```
+
+```{r}
+bench::mark(
+  ols_qr(x,y),
+  ols_svd(x,y), check = FALSE
+)
+```
+
+Based on the benchmark result, SVD is more computationally efficient than QR decomposition.
