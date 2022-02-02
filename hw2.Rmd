@@ -181,15 +181,19 @@ I create a function `mvn_chol_sim` for the simulation.
 ```{r warning=FALSE,message=FALSE}
 devtools::load_all("./package/")
 library(bench)
+set.seed(144535)
 ```
 
 ```{r}
-N <- 100
 n <- 4
 # specify the mean vector and covariance matrix (positive definite)
 mu <- runif(n)
 A <- matrix(runif(n^2)*2-1, ncol = n)
 sigma <- t(A) %*% A
+```
+
+```{r}
+N <- 100
 # simulation
 sim_x <- mvn_chol_sim(N, mu, sigma)
 # validation
@@ -200,6 +204,23 @@ sample_mean
 sigma
 sample_cov
 ```
+
+I also do the simulation when the number of realization $N=100000$:
+
+```{r}
+N <- 100000
+# simulation
+sim_x <- mvn_chol_sim(N, mu, sigma)
+# validation
+sample_mean <- apply(sim_x, 1, mean)
+sample_cov <- cov(t(sim_x))
+mu
+sample_mean
+sigma
+sample_cov
+```
+
+The difference between ground truth and simulated statistics is much lower.
 
 # Problem 8
 
